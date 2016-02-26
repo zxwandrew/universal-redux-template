@@ -14,6 +14,7 @@ try {
   const app      = koa();
   const hostname = process.env.HOSTNAME || "localhost";
   const port     = process.env.PORT || 8000;
+  const debug = process.env.NODE_ENV !== "production";
 
   let viewpath = 'dist/views';
   app.use(koaStatic("dist"));
@@ -42,7 +43,14 @@ try {
         }
 
         const markup = ReactDOM.renderToString(<RouterContext {...props}/>);
-        this.render('index', {data: markup});
+        let clientsource = ""
+
+        if(debug){
+          clientsource = 'http://localhost:8080/client.min.js';
+        }else{
+          clientsource =  '/client.min.js';
+        }
+        this.render('index', {data: markup, client: clientsource});
       });
     // });
   });
@@ -51,6 +59,22 @@ try {
     console.info("==> ✅  Server is listening");
     console.info("==> 🌎  Go to http://%s:%s", hostname, port);
   });
+
+  // if(debug){
+  //     if (module.hot) {
+  //       console.log("[HMR] Waiting for server-side updates");
+  //
+  //       module.hot.accept("./app/routes/routes", () => {
+  //         // routes = require("./app/routes/routes");
+  //       });
+  //
+  //       module.hot.addStatusHandler((status) => {
+  //         if (status === "abort") {
+  //           setTimeout(() => process.exit(0), 0);
+  //         }
+  //       });
+  //   }
+  // }
 
 
 }catch(error){

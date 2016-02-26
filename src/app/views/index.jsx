@@ -4,6 +4,7 @@ export default class Layout extends React.Component{
 
   render() {
     let contentHtml = this.props.data
+    let clientsource = this.props.client
     return (
       <html>
         <head>
@@ -11,7 +12,7 @@ export default class Layout extends React.Component{
         </head>
         <body>
           <div id="app" dangerouslySetInnerHTML={{__html: contentHtml}}/>
-          <script src="/client.min.js"/>
+          <script src={clientsource}/>
         </body>
       </html>
     );
