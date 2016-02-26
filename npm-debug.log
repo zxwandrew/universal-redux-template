@@ -2,23 +2,21 @@
 1 verbose cli [ '/usr/local/Cellar/node/5.6.0/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'run',
-1 verbose cli   'watch-server-start' ]
+1 verbose cli   'watch-client' ]
 2 info using npm@3.6.0
 3 info using node@v5.6.0
-4 verbose run-script [ 'prewatch-server-start',
-4 verbose run-script   'watch-server-start',
-4 verbose run-script   'postwatch-server-start' ]
-5 info lifecycle reactexperiment@1.0.0~prewatch-server-start: reactexperiment@1.0.0
-6 silly lifecycle reactexperiment@1.0.0~prewatch-server-start: no script for prewatch-server-start, continuing
-7 info lifecycle reactexperiment@1.0.0~watch-server-start: reactexperiment@1.0.0
-8 verbose lifecycle reactexperiment@1.0.0~watch-server-start: unsafe-perm in lifecycle true
-9 verbose lifecycle reactexperiment@1.0.0~watch-server-start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Andrew/js/react/my-templates/universalreduxtemplate/node_modules/.bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Andrew/js/react/my-templates/universalreduxtemplate/node_modules/.bin:/Users/Andrew/.rbenv/shims:/usr/local/bin:/Users/Andrew/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin::/Users/Andrew/EsriProj/esri-cityengine-sdk:/Users/Andrew/EsriProj/esri-cityengine-sdk/include:/Users/Andrew/Boost/bin:
-10 verbose lifecycle reactexperiment@1.0.0~watch-server-start: CWD: /Users/Andrew/js/react/my-templates/universalreduxtemplate
-11 silly lifecycle reactexperiment@1.0.0~watch-server-start: Args: [ '-c',
-11 silly lifecycle   'node node_modules/just-wait --pattern "dist/*.js" && node-debug ./dist/server.min.js' ]
-12 silly lifecycle reactexperiment@1.0.0~watch-server-start: Returned: code: 1  signal: null
-13 info lifecycle reactexperiment@1.0.0~watch-server-start: Failed to exec watch-server-start script
-14 verbose stack Error: reactexperiment@1.0.0 watch-server-start: `node node_modules/just-wait --pattern "dist/*.js" && node-debug ./dist/server.min.js`
+4 verbose run-script [ 'prewatch-client', 'watch-client', 'postwatch-client' ]
+5 info lifecycle reactexperiment@1.0.0~prewatch-client: reactexperiment@1.0.0
+6 silly lifecycle reactexperiment@1.0.0~prewatch-client: no script for prewatch-client, continuing
+7 info lifecycle reactexperiment@1.0.0~watch-client: reactexperiment@1.0.0
+8 verbose lifecycle reactexperiment@1.0.0~watch-client: unsafe-perm in lifecycle true
+9 verbose lifecycle reactexperiment@1.0.0~watch-client: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Andrew/js/react/my-templates/universalreduxtemplate/node_modules/.bin:/usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Andrew/js/react/my-templates/universalreduxtemplate/node_modules/.bin:/Users/Andrew/.rbenv/shims:/usr/local/bin:/Users/Andrew/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin::/Users/Andrew/EsriProj/esri-cityengine-sdk:/Users/Andrew/EsriProj/esri-cityengine-sdk/include:/Users/Andrew/Boost/bin:
+10 verbose lifecycle reactexperiment@1.0.0~watch-client: CWD: /Users/Andrew/js/react/my-templates/universalreduxtemplate
+11 silly lifecycle reactexperiment@1.0.0~watch-client: Args: [ '-c',
+11 silly lifecycle   'node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.js' ]
+12 silly lifecycle reactexperiment@1.0.0~watch-client: Returned: code: 1  signal: null
+13 info lifecycle reactexperiment@1.0.0~watch-client: Failed to exec watch-client script
+14 verbose stack Error: reactexperiment@1.0.0 watch-client: `node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.js`
 14 verbose stack Exit status 1
 14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:232:16)
 14 verbose stack     at emitTwo (events.js:100:13)
@@ -31,18 +29,18 @@
 15 verbose pkgid reactexperiment@1.0.0
 16 verbose cwd /Users/Andrew/js/react/my-templates/universalreduxtemplate
 17 error Darwin 15.3.0
-18 error argv "/usr/local/Cellar/node/5.6.0/bin/node" "/usr/local/bin/npm" "run" "watch-server-start"
+18 error argv "/usr/local/Cellar/node/5.6.0/bin/node" "/usr/local/bin/npm" "run" "watch-client"
 19 error node v5.6.0
 20 error npm  v3.6.0
 21 error code ELIFECYCLE
-22 error reactexperiment@1.0.0 watch-server-start: `node node_modules/just-wait --pattern "dist/*.js" && node-debug ./dist/server.min.js`
+22 error reactexperiment@1.0.0 watch-client: `node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.js`
 22 error Exit status 1
-23 error Failed at the reactexperiment@1.0.0 watch-server-start script 'node node_modules/just-wait --pattern "dist/*.js" && node-debug ./dist/server.min.js'.
+23 error Failed at the reactexperiment@1.0.0 watch-client script 'node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.js'.
 23 error Make sure you have the latest version of node.js and npm installed.
 23 error If you do, this is most likely a problem with the reactexperiment package,
 23 error not with npm itself.
 23 error Tell the author that this fails on your system:
-23 error     node node_modules/just-wait --pattern "dist/*.js" && node-debug ./dist/server.min.js
+23 error     node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.js
 23 error You can get information on how to open an issue for this project with:
 23 error     npm bugs reactexperiment
 23 error Or if that isn't available, you can get their info via:

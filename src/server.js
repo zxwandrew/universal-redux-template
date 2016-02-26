@@ -1,3 +1,4 @@
+import babelPolyfill from "babel-polyfill";
 import koa from "koa";
 import register from "babel-core/register";
 import React from "react";
@@ -5,16 +6,16 @@ import KoaReactView from "koa-react-view";
 import koaStatic from "koa-static";
 import path from "path";
 import ReactDOM from "react-dom/server";
-var favicon = require('koa-favicon');
+import  favicon from 'koa-favicon';
 import { match, RouterContext } from 'react-router';
-import { routes } from "./app/routes/routes";
-import "babel-polyfill";
+import {routes} from "./app/routes/routes";
 
 try {
   const app      = koa();
   const hostname = process.env.HOSTNAME || "localhost";
   const port     = process.env.PORT || 8000;
   const debug = process.env.NODE_ENV !== "production";
+  // let routes = routesc;
 
   let viewpath = 'dist/views';
   app.use(koaStatic("dist"));
@@ -28,7 +29,7 @@ try {
   });
 
   app.use(function *(next) {
-    // yield ((callback) => {
+    yield ((callback) => {
       const location  = this.path;
     	match({routes, location}, (error, redirectLocation, props) => {
         if (redirectLocation) {
@@ -51,8 +52,9 @@ try {
           clientsource =  '/client.min.js';
         }
         this.render('index', {data: markup, client: clientsource});
+        callback(null);
       });
-    // });
+    });
   });
 
   app.listen(port, () => {
@@ -60,21 +62,21 @@ try {
     console.info("==> 🌎  Go to http://%s:%s", hostname, port);
   });
 
-  // if(debug){
-  //     if (module.hot) {
-  //       console.log("[HMR] Waiting for server-side updates");
-  //
-  //       module.hot.accept("./app/routes/routes", () => {
-  //         // routes = require("./app/routes/routes");
-  //       });
-  //
-  //       module.hot.addStatusHandler((status) => {
-  //         if (status === "abort") {
-  //           setTimeout(() => process.exit(0), 0);
-  //         }
-  //       });
-  //   }
-  // }
+  if(debug){
+      if (module.hot) {
+        console.log("[HMR] Waiting for server-side updates");
+
+        module.hot.accept("./app/routes/routes", () => {
+          // routes = require("./app/routes/routes").routes;
+        });
+
+        module.hot.addStatusHandler((status) => {
+          if (status === "abort") {
+            setTimeout(() => process.exit(0), 0);
+          }
+        });
+    }
+  }
 
 
 }catch(error){
