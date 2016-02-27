@@ -4,27 +4,30 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, "src"),
+  target: "web",
+  cache: false,
+  context: __dirname,
   devtool: debug ? "inline-sourcemap" : null,
-  entry: ["./client.js"],
+  entry: ["./src/client.js"],
   module: {
     loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-        }
-      }
-    ]
+			{test: /\.json$/, loaders: ["json"]}
+		],
+		postLoaders: [
+			{test: /\.js$/, loaders: ["babel?presets[]=es2015&presets[]=stage-0&presets[]=react"], exclude: /node_modules/}
+		],
+		noParse: /\.min\.js/
   },
   resolve:{
-    extenstions: ['.jsx', '.js', '']
+    modulesDirectories: [
+      "src",
+      "node_modules",
+      "web_modules"
+    ],
+    extensions: ["", ".json", ".js"]
   },
   output: {
-    path: __dirname + "/dist/",
+    path: path.join(__dirname + "/dist"),
     filename: "client.min.js"
   },
   plugins: debug ? [] : [

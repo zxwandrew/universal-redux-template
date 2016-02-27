@@ -1,56 +1,61 @@
 import babelPolyfill from "babel-polyfill";
 import koa from "koa";
-import register from "babel-core/register";
 import React from "react";
-import KoaReactView from "koa-react-view";
-import koaStatic from "koa-static";
-import path from "path";
 import ReactDOM from "react-dom/server";
-import  favicon from 'koa-favicon';
 import { match, RouterContext } from 'react-router';
-import {routes} from "./app/routes/routes";
+import koaStatic from "koa-static";
+import routesContainer from "./app/routes/routes";
+
+// import path from "path";
+// import  favicon from 'koa-favicon';
+
+
+import KoaReactView from "koa-react-view";
+import register from "babel-core/register";
 
 try {
   const app      = koa();
   const hostname = process.env.HOSTNAME || "localhost";
   const port     = process.env.PORT || 8000;
   const debug = process.env.NODE_ENV !== "production";
-  // let routes = routesc;
+  let routes = routesContainer;
 
-  let viewpath = 'dist/views';
   app.use(koaStatic("dist"));
-  app.use(favicon('public/favicon.ico'));
-
+  let viewpath = 'dist/views';
   KoaReactView(app, {views: viewpath})
   register({
     only: [
       viewpath
     ]
   });
+  // app.use(favicon('public/favicon.ico'));
+
 
   app.use(function *(next) {
     yield ((callback) => {
       const location  = this.path;
-    	match({routes, location}, (error, redirectLocation, props) => {
+
+
+    	match({routes, location}, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
           this.redirect(redirectLocation.pathname + redirectLocation.search, "/");
           return;
         }
 
-        if (error || !props) {
+        if (error || !renderProps) {
           console.log("ERROR: "+error)
-          // callback(error);
+          callback(error);
           return;
         }
 
-        const markup = ReactDOM.renderToString(<RouterContext {...props}/>);
-        let clientsource = ""
-
-        if(debug){
-          clientsource = 'http://localhost:8080/client.min.js';
-        }else{
-          clientsource =  '/client.min.js';
-        }
+        const markup = ReactDOM.renderToString(<RouterContext {...renderProps}/>);
+        const clientsource = debug ? 'http://localhost:8080/dist/client.min.js' : '/client.min.js';
+        // console.log("MARKUP: "+markup)
+        // if(debug){
+        //   clientsource = 'http://localhost:8080/client.min.js';
+        // }else{
+        //   clientsource =  '/client.min.js';
+        // }
         this.render('index', {data: markup, client: clientsource});
         callback(null);
       });
@@ -64,10 +69,10 @@ try {
 
   if(debug){
       if (module.hot) {
-        console.log("[HMR] Waiting for server-side updates");
+        console.log("[HMR] Waiting for server-side updates#############");
 
         module.hot.accept("./app/routes/routes", () => {
-          // routes = require("./app/routes/routes").routes;
+          routes = require("./app/routes/routes");
         });
 
         module.hot.addStatusHandler((status) => {

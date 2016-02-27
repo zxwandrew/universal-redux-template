@@ -24,10 +24,10 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = [{
   target: 'node',
   cache: false,
-  context: path.join(__dirname, "src"),
+  context: __dirname,
   debug: false,
   devtool: "source-map",
-  entry: ["./server.js"],
+  entry: ["./src/server"],
   output: {
     path: path.join(__dirname, "dist"),
     filename: "server.min.js"
@@ -52,7 +52,7 @@ module.exports = [{
         "node_modules",
         "web_modules"
       ],
-      extenstions: ['.json', '.js', '']
+      extensions: ["", ".json", ".js"]
   },
 	node:    {
 		__dirname: true,

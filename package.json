@@ -5,15 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=production node ./dist/server.min.js",
+    "start-dev": "node ./dist/server.min.js",
+
     "build-client": "webpack --config webpack.client.js --colors --display-error-details",
     "build-server": "webpack --config webpack.server.js --colors --display-error-details",
     "build": "node node_modules/concurrently/src/main \"npm run build-server\" \"npm run build-client\"",
+
     "watch-server": "node node_modules/webpack/bin/webpack --watch --verbose --colors --display-error-details --config webpack.server.watch.js ",
-    "watch-server-start": "node node_modules/just-wait --pattern \"dist/*.js\" && node ./dist/server.min.js",
+    "watch-server-start": "node node_modules/just-wait --pattern \"dist/*.js\" && npm run start-dev",
     "watch-server-start-debug": "node node_modules/just-wait --pattern \"dist/*.js\" && node-debug -p 8888 ./dist/server.min.js",
-    "watch-client": "node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.js",
+    "watch-client": "node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.watch.js",
+
     "watch": "node node_modules/concurrently/src/main --kill-others \"npm run watch-server-start\" \"npm run watch-server\" \"npm run watch-client\"",
-    "dev": "webpack-dev-server --content-base dist --inline --hot",
+    "watch-debug": "node node_modules/concurrently/src/main --kill-others \"npm run watch-server-start-debug\" \"npm run watch-server\" \"npm run watch-client\"",
+
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "andrew wang",
@@ -22,6 +27,7 @@
     "babel-plugin-react-html-attrs": "^2.0.0",
     "concurrently": "^2.0.0",
     "copy-webpack-plugin": "^1.1.1",
+    "forever": "^0.15.1",
     "just-wait": "^1.0.4"
   },
   "dependencies": {
@@ -32,6 +38,7 @@
     "babel-polyfill": "^6.5.0",
     "babel-preset-es2015": "^6.5.0",
     "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.0",
     "babel-preset-stage-0": "^6.5.0",
     "history": "^2.0.0",
     "html-loader": "^0.4.3",
