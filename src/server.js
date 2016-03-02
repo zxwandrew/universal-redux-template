@@ -13,6 +13,9 @@ import routesContainer from "./app/routes/routes";
 import KoaReactView from "koa-react-view";
 import register from "babel-core/register";
 
+import { Provider } from 'react-redux';
+import {store} from './app/store/store'
+
 try {
   const app      = koa();
   const hostname = process.env.HOSTNAME || "localhost";
@@ -48,7 +51,11 @@ try {
           return;
         }
 
-        const markup = ReactDOM.renderToString(<RouterContext {...renderProps}/>);
+        const markup = ReactDOM.renderToString(
+          <Provider store={store}>
+            <RouterContext {...renderProps}/>
+          </Provider>
+        );
         const clientsource = debug ? 'http://localhost:8080/dist/client.min.js' : '/client.min.js';
         // console.log("MARKUP: "+markup)
         // if(debug){
@@ -56,7 +63,7 @@ try {
         // }else{
         //   clientsource =  '/client.min.js';
         // }
-        this.render('index', {data: markup, client: clientsource});
+        this.render('index', {data: markup, client: clientsource, store: store});
         callback(null);
       });
     });

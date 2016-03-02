@@ -5,6 +5,9 @@ import CoreLayout from "../layouts/CoreLayout";
 import HomeView from "../pages/HomeView";
 import CounterPage from "../pages/CounterPage";
 
+import { Provider } from 'react-redux';
+import {store} from '../store/store'
+
 module.exports = (
 	<Router>
 		<Route path="/" component={CoreLayout}>

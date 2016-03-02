@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router';
+import { Provider } from 'react-redux'
 import '../styles/core.scss'
 
 class CoreLayout extends React.Component{

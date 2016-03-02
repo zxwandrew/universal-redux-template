@@ -6,19 +6,15 @@
   "scripts": {
     "start": "NODE_ENV=production node ./dist/server.min.js",
     "start-dev": "node ./dist/server.min.js",
-
     "build-client": "webpack --config webpack.client.js --colors --display-error-details",
     "build-server": "webpack --config webpack.server.js --colors --display-error-details",
     "build": "node node_modules/concurrently/src/main \"npm run build-server\" \"npm run build-client\"",
-
-    "watch-server": "node node_modules/webpack/bin/webpack --watch --verbose --colors --display-error-details --config webpack.server.watch.js ",
+    "watch-server": "webpack --watch --verbose --colors --display-error-details --config webpack.server.watch.js ",
     "watch-server-start": "node node_modules/just-wait --pattern \"dist/*.js\" && npm run start-dev",
     "watch-server-start-debug": "node node_modules/just-wait --pattern \"dist/*.js\" && node-debug -p 8888 ./dist/server.min.js",
-    "watch-client": "node node_modules/webpack-dev-server/bin/webpack-dev-server --config webpack.client.watch.js",
-
+    "watch-client": "webpack-dev-server --config webpack.client.watch.js",
     "watch": "node node_modules/concurrently/src/main --kill-others \"npm run watch-server-start\" \"npm run watch-server\" \"npm run watch-client\"",
     "watch-debug": "node node_modules/concurrently/src/main --kill-others \"npm run watch-server-start-debug\" \"npm run watch-server\" \"npm run watch-client\"",
-
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "andrew wang",
@@ -49,7 +45,11 @@
     "koa-static": "^2.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
+    "react-router-redux": "^4.0.0",
+    "redux": "^3.3.1",
+    "redux-thunk": "^1.0.3",
     "webpack": "^1.12.13",
     "webpack-dev-server": "^1.14.1",
     "webpack-node-externals": "^1.0.0"
