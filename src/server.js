@@ -2,9 +2,10 @@ import babelPolyfill from "babel-polyfill";
 import koa from "koa";
 import React from "react";
 import ReactDOM from "react-dom/server";
-import { match, RouterContext } from 'react-router';
+import { match, RouterContext, createMemoryHistory } from 'react-router';
 import koaStatic from "koa-static";
 import routesContainer from "./app/routes/routes";
+import {syncHistoryWithStore} from 'react-router-redux'
 
 // import path from "path";
 // import  favicon from 'koa-favicon';
@@ -14,7 +15,7 @@ import KoaReactView from "koa-react-view";
 import register from "babel-core/register";
 
 import { Provider } from 'react-redux';
-import {store} from './app/store/store'
+import {configureStore} from './app/store/store'
 
 try {
   const app      = koa();
@@ -36,15 +37,18 @@ try {
 
   app.use(function *(next) {
     yield ((callback) => {
-      const location  = this.path;
+      const location  = this.url;
+
+      const memoryHistory = createMemoryHistory(location);
+      const store = configureStore(memoryHistory)
+      const history = syncHistoryWithStore(memoryHistory, store)
 
 
-    	match({routes, location}, (error, redirectLocation, renderProps) => {
+    	match({history, routes, location}, (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
           this.redirect(redirectLocation.pathname + redirectLocation.search, "/");
           return;
         }
-
         if (error || !renderProps) {
           console.log("ERROR: "+error)
           callback(error);

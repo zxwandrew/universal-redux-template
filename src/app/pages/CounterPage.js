@@ -14,8 +14,8 @@ class CounterPage extends React.Component{
       <div>
       <h2>Count Something!!</h2>
       <Counter value={this.props.counter}
-        onIncrement={this.props.increment}
-        onDecrement={this.props.decrement}>
+        onIncrement={this.props.onIncrement}
+        onDecrement={this.props.onDecrement}>
       </Counter>
     </div>
 
@@ -24,16 +24,16 @@ class CounterPage extends React.Component{
 }
 
 const mapStateToProps = (state) => ({
-  counter: state.CounterReducer
+  counter: state.counter
 });
 
-const mapDispatchToProps = (state) => ({
+const mapDispatchToProps = (dispatch) => ({
   onIncrement : ()=>{
     dispatch({
       type: "INCREMENT"
     })
   },
-  onIncrement : ()=>{
+  onDecrement : ()=>{
     dispatch({
       type: "DECREMENT"
     })

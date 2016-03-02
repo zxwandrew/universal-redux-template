@@ -9,28 +9,10 @@ import { Provider } from 'react-redux';
 import {store} from '../store/store'
 
 module.exports = (
-	<Router>
+
 		<Route path="/" component={CoreLayout}>
       <IndexRoute component={HomeView}/>
       <Route path="/counter" component={CounterPage}/>
     </Route>
-	</Router>
+
 );
-
-
-
-// const routes = {
-//   path: '',
-//   component: CoreLayout,
-//   childRoutes: [
-//     {
-//       path: '/',
-//       component: HomeView
-//     },{
-//       path: '/counter',
-//       component: CounterPage
-//     }
-//   ]
-// }
-//
-// export { routes };
