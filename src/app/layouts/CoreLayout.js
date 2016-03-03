@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router';
-import { Provider } from 'react-redux'
+
 import '../styles/core.scss'
 
 class CoreLayout extends React.Component{
@@ -13,7 +13,6 @@ class CoreLayout extends React.Component{
                   <li><Link to='/'>Home</Link></li>
                   <li><Link to='/counter'>Counter</Link></li>
                 </ul>
-
               {this.props.children}
             </div>
           </div>

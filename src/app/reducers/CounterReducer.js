@@ -1,10 +1,10 @@
-import { INCREMENT, DECREMENT } from '../actions/CounterActions';
+import { COUNTER_INCREMENT, COUNTER_DECREMENT } from '../actions/CounterActions';
 
 const CounterReducer = (state=7, action)=>{
   switch(action.type){
-    case INCREMENT:
+    case COUNTER_INCREMENT:
       return state+1;
-    case DECREMENT:
+    case COUNTER_DECREMENT:
       return state-1;
     default:
       return state;

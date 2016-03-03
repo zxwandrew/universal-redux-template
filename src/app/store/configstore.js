@@ -1,8 +1,10 @@
 import thunk from 'redux-thunk';
 import React from 'react'
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import {CounterReducer} from '../reducers/CounterReducer'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
+
+import {CounterReducer} from '../reducers/CounterReducer'
+
 
 export function configureStore(history, initialState) {
   const reducer = combineReducers({

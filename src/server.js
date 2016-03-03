@@ -4,17 +4,14 @@ import React from "react";
 import ReactDOM from "react-dom/server";
 import { match, RouterContext, createMemoryHistory } from 'react-router';
 import koaStatic from "koa-static";
-import routesContainer from "./app/routes/routes";
 import {syncHistoryWithStore} from 'react-router-redux'
-
+import KoaReactView from "koa-react-view";
+import register from "babel-core/register";
+import { Provider } from 'react-redux';
 // import path from "path";
 // import  favicon from 'koa-favicon';
 
-
-import KoaReactView from "koa-react-view";
-import register from "babel-core/register";
-
-import { Provider } from 'react-redux';
+import routesContainer from "./app/routes/routes";
 import {configureStore} from './app/store/configstore'
 
 try {
