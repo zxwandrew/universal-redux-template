@@ -7,7 +7,7 @@ import routes from './app/routes/routes';
 
 
 import { Provider } from 'react-redux';
-import { configureStore, DevTools } from './app/store/store'
+import { configureStore, DevTools } from './app/store/configstore'
 // import {store} from './app/store/store'
 
 

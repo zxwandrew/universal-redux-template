@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-class HomeView extends React.Component{
+class HomePage extends React.Component{
   render(){
     return(
       <h2>Home!!</h2>
@@ -8,4 +8,4 @@ class HomeView extends React.Component{
   }
 }
 
-export default HomeView;
+export default HomePage;

@@ -1,24 +1,17 @@
 import React, { PropTypes } from 'react'
-import Counter from '../components/Counter'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 
-class CounterPage extends React.Component{
-  static propTypes = {
-    counter: PropTypes.number.isRequired,
-    onIncrement: PropTypes.func.isRequired,
-    onDecrement: PropTypes.func.isRequired,
-  };
+import Counter from '../components/Counter'
+import * as CounterActions from '../actions/CounterActions'
 
+class CounterPage extends React.Component{
   render(){
     return(
       <div>
-      <h2>Count Something!!</h2>
-      <Counter value={this.props.counter}
-        onIncrement={this.props.onIncrement}
-        onDecrement={this.props.onDecrement}>
-      </Counter>
-    </div>
-
+        <h2>Count Something!!</h2>
+        <Counter/>
+      </div>
     )
   }
 }
@@ -26,18 +19,7 @@ class CounterPage extends React.Component{
 const mapStateToProps = (state) => ({
   counter: state.counter
 });
-
-const mapDispatchToProps = (dispatch) => ({
-  onIncrement : ()=>{
-    dispatch({
-      type: "INCREMENT"
-    })
-  },
-  onDecrement : ()=>{
-    dispatch({
-      type: "DECREMENT"
-    })
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CounterPage);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(CounterActions, dispatch)
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
