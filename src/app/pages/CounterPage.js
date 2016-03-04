@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import Counter from '../components/Counter'
-import * as CounterActions from '../actions/CounterActions'
+import Counter from '../components/Counter';
+import * as CounterActions from '../actions/CounterActions';
 
 class CounterPage extends React.Component {
   render () {

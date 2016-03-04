@@ -9,6 +9,7 @@
     "build-client": "webpack --config webpack.client.js --colors --display-error-details",
     "build-server": "webpack --config webpack.server.js --colors --display-error-details",
     "build": "node node_modules/concurrently/src/main \"npm run build-server\" \"npm run build-client\"",
+    "lint": "eslint .",
     "watch-server": "webpack --watch --verbose --colors --display-error-details --config webpack.server.watch.js ",
     "watch-server-start": "node node_modules/just-wait --pattern \"dist/*.js\" && npm run start-dev",
     "watch-server-start-debug": "node node_modules/just-wait --pattern \"dist/*.js\" && node-debug -p 8888 ./dist/server.min.js",
