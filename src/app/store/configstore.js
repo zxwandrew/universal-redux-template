@@ -1,16 +1,15 @@
 import thunk from 'redux-thunk';
-import React from 'react'
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
-import { routerReducer, routerMiddleware } from 'react-router-redux'
+import React from 'react';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 
-import {CounterReducer} from '../reducers/CounterReducer'
+import {CounterReducer} from '../reducers/CounterReducer';
 
-
-export function configureStore(history, initialState) {
+export function configureStore (history, initialState) {
   const reducer = combineReducers({
     routing: routerReducer,
     counter: CounterReducer
-  })
+  });
 
   const store = createStore(
     reducer,
@@ -22,7 +21,7 @@ export function configureStore(history, initialState) {
       ),
       typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
     )
-  )
+  );
 
-  return store
+  return store;
 }

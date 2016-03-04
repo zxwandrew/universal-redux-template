@@ -1,0 +1,16 @@
+{
+  "parser"  : "babel-eslint",
+  "extends" : [
+    "standard",
+    "standard-react"
+  ],
+  "env"     : {
+    "browser" : true
+  },
+  "rules": {
+    "quotes": [0, "single", "avoid-escape"],
+    "semi" : [2, "always" , { "omitLastInOneLineBlock": true}],
+    "space-infix-ops": 0,
+    "max-len": [2, 120, 2],
+  }
+}
