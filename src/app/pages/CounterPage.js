@@ -7,19 +7,26 @@ import * as CounterActions from '../actions/CounterActions'
 
 class CounterPage extends React.Component{
   render(){
+    const {counterState, counterActions} = this.props
     return(
       <div>
         <h2>Count Something!!</h2>
-        <Counter/>
+        <Counter counter={counterState}
+          incrementCounter={counterActions.incrementCounter}
+          decrementCounter={counterActions.decrementCounter}/>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  counter: state.counter
-});
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(CounterActions, dispatch)
+const mapStateToProps = (state) => {
+  return{
+    counterState: state.counter
+  }
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    counterActions: bindActionCreators(CounterActions, dispatch)
+  }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CounterPage);
