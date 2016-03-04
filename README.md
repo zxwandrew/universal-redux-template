@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zxwandrew/universal-redux-template.svg?branch=master)](https://travis-ci.org/zxwandrew/universal-redux-template)
+
 # A clean Universal JS Template for react
 
 based on:
