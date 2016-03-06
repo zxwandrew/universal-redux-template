@@ -1,4 +1,4 @@
-// var webpack = require("webpack");
+var webpack = require("webpack");
 var nodeExternals = require('webpack-node-externals');
 var path = require('path');
 // var fs = require("fs");
@@ -29,7 +29,10 @@ module.exports = [
       path: path.join(__dirname, 'dist'),
       filename: 'server.min.js'
     },
-    plugins: [],
+    plugins: [
+      new webpack.ResolverPlugin(
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
+    ), new webpack.dependencies.LabeledModulesPlugin()],
     module: {
       loaders: [{
         test: /\.json$/,
@@ -38,12 +41,18 @@ module.exports = [
       postLoaders: [{
         test: /\.js$/,
         loaders: ['babel?presets[]=es2015&presets[]=stage-0&presets[]=react'],
-        exclude: /node_modules/
+        exclude: [/node_modules/, /bower_components/]
       }],
       noParse: /\.min\.js/
     },
-    externals: [nodeExternals({ whitelist: ['webpack/hot/poll?1000'] })],
+    amd: {},
+    externals: [nodeExternals({ whitelist: ['webpack/hot/poll?1000'] }),
+    {'esri': 'arcgis-js-api'},
+    {'esri/map': "esri/map.js"},
+    {'esri/views/SceneView': "views/SceneView.js"},
+    {'dojo/domReady': 'dojo/domReady'}],
     resolve: {
+      root: [path.join(__dirname, "bower_components")],
       modulesDirectories: [
         'src',
         'node_modules',

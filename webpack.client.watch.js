@@ -13,6 +13,10 @@ config.output.hotUpdateMainFilename = 'update/[hash]/update.json';
 config.output.hotUpdateChunkFilename = 'update/[hash]/[id].update.js';
 
 config.plugins = [
+  new webpack.ResolverPlugin(
+    new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
+),
+new webpack.dependencies.LabeledModulesPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin()
 ];
@@ -20,7 +24,7 @@ config.plugins = [
 config.module.postLoaders = [{
   test: /\.js$/,
   loaders: ['babel?cacheDirectory&presets[]=es2015&presets[]=stage-0&presets[]=react&presets[]=react-hmre'],
-  exclude: /node_modules/
+  exclude: [/node_modules/, /bower_components/]
 }];
 
 config.devServer = {

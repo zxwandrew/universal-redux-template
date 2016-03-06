@@ -1,0 +1,21 @@
+{
+  "name": "reactexperiment",
+  "description": "react webpack",
+  "main": "index.js",
+  "authors": [
+    "andrew wang"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/zxwandrew/universal-redux-template",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "esri": "arcgis-js-api#3.16"
+  }
+}
